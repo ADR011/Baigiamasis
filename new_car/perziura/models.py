@@ -17,7 +17,7 @@ class Order(models.Model):
 
 class Marke(models.Model):
     automobilio_marke = models.CharField('automobilio marke', max_length=20, null=True, blank=True, default='pass')
-    orders = models.ForeignKey(Order, on_delete=models.DO_NOTHING, null=True, related_name='marke')
+    orders = models.ManyToManyField(Order, null=True, related_name='marke', blank=True)
     class Meta:
         verbose_name = 'Marke'
         verbose_name_plural = 'Markes'
