@@ -1,0 +1,22 @@
+
+<h1>Rementų sąrašas</h1>
+
+<table>
+    <tr>
+      <th>Vardas</th>
+      <th>Pavardė</th>
+      <th>Markė</th> 
+      <th>Modelis</th>
+      <th>Metai</th>
+    </tr>
+    {% for order in orders %}
+    <tr>
+      <td>{{order.vardas}}</td>
+      <td>{{order.pavarde}}</td>
+      <td>{{order.marke.first}}</td> 
+      <td>{{order.marke.first.modelis.first}}</td>
+      <td>{{order.marke.first.modelis.first.metai.first}}</td>  
+    </tr>
+    {% endfor %}
+  
+  </table>  

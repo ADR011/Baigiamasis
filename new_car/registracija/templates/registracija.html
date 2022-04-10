@@ -1,0 +1,72 @@
+<h1>Registracija</h1>
+
+<!--Register-->
+<form method='post'>
+    {% csrf_token %}
+  Vardas
+  <input
+    name="user_name"
+    type="text"
+    id="user_name"
+    class="form-control"
+    aria-describedby="user_nameBlock"
+  />
+  <br />
+  Pavardė
+  <input
+    name="last_name"
+    type="text"
+    id="last_name"
+    class="form-control"
+    aria-describedby="last_nameBlock"
+  />
+  <br />
+  Gimimo data
+  <input
+    name="date"
+    type="text"
+    id="date"
+    class="form-control"
+    aria-describedby="adddateBlock"
+  />
+  <br />
+  Elektroninis paštas
+  <input
+    name="email"
+    type="email"
+    id="Elektroninis paštas"
+    class="form-control"
+    aria-describedby="Elektroninis paštasBlock"
+  />
+  <br />
+  Automobilio markė
+  <select name="marke" placeholder="Pasirinkti markę...">
+    <option value="Audi">Audi</option>
+    <option value="BMW">BMW</option>
+    <option value="Mersedes-Benz">Mersedes-Benz</option>
+    <option value="Opel">Opel</option>
+    <option value="Porsche">Porsche</option>
+  </select>
+
+  <br />
+  Automobilio modelis
+  <input
+    name="modelis"
+    type="text"
+    id="Automobilio modelis"
+    class="form-control"
+    aria-describedby="Automobilio modelis"
+  />
+  <br />
+  Automobilio pagaminimo metai
+  <input
+    name="metai"
+    type="text"
+    id="Automobilio pagaminimo metai"
+    class="form-control"
+    aria-describedby="Automobilio pagaminimo metai"
+  />
+  <br />
+
+  <button type="submit" class="btn btn-primary">Registruotis</button>
+</form>
