@@ -38,6 +38,7 @@ def registracija(request):
         new.marke.add(marke)
     
         new.save()
+        
 #    print(request.META['USER'])
 #    return HttpResponse("Hello, world. You're at the registracija page.")
     return render(request, 'registracija.html')
