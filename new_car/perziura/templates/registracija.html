@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+
 <h1>Registracija</h1>
 
 <!--Register-->
@@ -40,6 +43,7 @@
   />
   <br />
   Automobilio markė
+  <br />
   <select name="marke" placeholder="Pasirinkti markę...">
     <option value="Audi">Audi</option>
     <option value="BMW">BMW</option>
@@ -47,6 +51,7 @@
     <option value="Opel">Opel</option>
     <option value="Porsche">Porsche</option>
   </select>
+  <br />
 
   <br />
   Automobilio modelis
@@ -79,3 +84,5 @@
 
   <button type="submit" class="btn btn-primary">Registruotis</button>
 </form>
+
+{% endblock content %}
