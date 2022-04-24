@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block content %}
 <h3>Registracija</h3>
@@ -42,35 +43,16 @@
   <br />
   Automobilio markė
   <br />
-  <select name="marke" placeholder="Pasirinkti markę...">
-    <option value="Audi">Audi</option>
-    <option value="BMW">BMW</option>
-    <option value="Mercedes-Benz">Mersedes-Benz</option>
-    <option value="Opel">Opel</option>
-    <option value="Porsche">Porsche</option>
-  </select>
+  <select name="marke" id='marke' placeholder="Pasirinkti markę..." onchange='pakeistiModelius()'/>
   <br />
   <br />
   Automobilio modelis
-  <select name="modelis" placeholder="Pasirinkti modelį..">
-    <option value="">A5</option>
-    <option value="">A7</option>
-    name="modelis"
-    type="text"
-    id="Automobilio modelis"
-    class="form-control"
-    aria-describedby="Automobilio modelis"
-  />
+  <select name="modelis"  id='modelis' placeholder="Pasirinkti modelį..">
   </select>
   <br />
   Automobilio pagaminimo metai
-  <input
-    name="metai"
-    type="text"
-    id="Automobilio pagaminimo metai"
-    class="form-control"
-    aria-describedby="Automobilio pagaminimo metai"
-  />
+  <select name="metai"  id='metai' placeholder="Pasirinkti metus..">
+  </select>
   <br />
   Automobilio spalva
   <input
@@ -83,4 +65,35 @@
   <br />
   <button type="submit" class="btn btn-primary">Registruotis</button>
 </form>
+<script>
+  const masinuListas = {% autoescape off %}{{ listas }}{% endautoescape %};
+  let selectMarke=document.getElementById('marke');
+  let selectModelis=document.getElementById('modelis');
+  
+  masinuListas.forEach(car=>{
+    let option = document.createElement("option");
+    option.value = car.marke;
+    console.log(option.value);
+    option.text = car.marke;
+    selectMarke.add(option);
+  });
+  const pakeistiModelius=()=>{
+    
+    console.log(selectMarke.value)
+    masinuListas.forEach(car=>{
+      if(car.marke==selectMarke.value){
+        car.modeliai.forEach(modelis=>{
+          let option1 = document.createElement("option");
+          option1.value = modelis.modelis;
+          console.log(option1.value);
+          option1.text = modelis.modelis;
+          selectModelis.add(option1);
+        });
+        
+      };
+      
+    });
+  };
+
+</script>
 {% endblock content %}

@@ -1,7 +1,6 @@
 from multiprocessing import context
 from django.shortcuts import render
-from .models import Order
-from perziura.models import Order, Marke, Metai, Modelis
+from .models import Order, Marke, Metai, Modelis
 from django.http import HttpResponse
 def perziura(request):
     orders = Order.objects.all()
@@ -31,7 +30,24 @@ def registracija(request):
         modelis.metai.add(metai)
         marke.modelis.add(modelis)
         new.marke.add(marke)
-        new.save()
-#    print(request.META['USER'])
-#    return HttpResponse("Hello, world. You're at the registracija page.")
-    return render(request, 'registracija.html')
+        new.save() 
+    listas = []
+    modeliai = Modelis.objects.all()
+    markes = Marke.objects.all()
+    metai = Metai.objects.all()
+    for marke in markes:
+        data = {}
+        # print(marke.modelis.all())
+        data['marke']=marke.automobilio_marke
+        data['modeliai'] = []
+
+        for modelis in marke.modelis.all():
+            naujas_modelis = {}
+            naujas_modelis['modelis'] = modelis.automobilio_modelis
+            naujas_modelis['metai'] = []
+            for m in modelis.metai.all():
+                naujas_modelis['metai'].append(str(m.automobilio_pagaminimo_metai))
+            data['modeliai'].append(naujas_modelis)
+        listas.append(data)
+    print(listas)
+    return render(request, 'registracija.html',context = {'listas':listas})
