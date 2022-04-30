@@ -44,3 +44,4 @@ class Metai(models.Model):
 
     def __str__(self):
         return f'{self.automobilio_pagaminimo_metai}' 
+
