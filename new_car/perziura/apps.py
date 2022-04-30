@@ -1,6 +1,10 @@
 from django.apps import AppConfig
 
 
-class PerziuraConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
+# class PerziuraConfig(AppConfig):
+#     default_auto_field = 'django.db.models.BigAutoField'
+#     name = 'perziura'
+
+
+class PersonsConfig(AppConfig):
     name = 'perziura'
