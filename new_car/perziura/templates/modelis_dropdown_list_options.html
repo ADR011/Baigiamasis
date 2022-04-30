@@ -1,0 +1,4 @@
+<option value="">Pasirinkite marke</option>
+{% for modelis in modeliai %}
+<option value="{{ modelis.pk }}">{{ modelis.name }}</option>
+{% endfor %}
