@@ -21,4 +21,4 @@ class PersonCreationForm(forms.ModelForm):
             except (ValueError, TypeError):
                 pass  # invalid input from the client; ignore and fallback to empty City queryset
         elif self.instance.pk:
-            self.fields['modelis'].queryset = self.instance.country.marke_set.order_by('name')
+            self.fields['modelis'].queryset = self.instance.marke.modelis_set.order_by('name')
