@@ -1,10 +1,46 @@
-
-
-
 {% extends 'base.html' %}
 
 
 {% block content %}
+
+
+
+<form method="post" id="personForm" data-modeliai-url="{% url 'ajax_load_modeliai' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_marke").change(function () {
+        const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
+        const markeId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'marke_id': markeId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_modelis").html(data);  // replace the contents of the city input with the data that came from the server
+                /*
+
+                let html_data = '<option value="">---------</option>';
+                data.forEach(function (city) {
+                    html_data += `<option value="${city.id}">${city.name}</option>`
+                });
+                console.log(html_data);
+                $("#id_city").html(html_data);
+
+                */
+            }
+        });
+
+    });
+</script>
+
+
 
 
 
@@ -31,14 +67,7 @@
     aria-describedby="last_nameBlock"
   />
   <br />
-  Gimimo data
-  <input
-    name="date"
-    type="text"
-    id="date"
-    class="form-control"
-    aria-describedby="adddateBlock"
-  />
+  
   <br />
   Elektroninis paštas
   <input
@@ -61,43 +90,7 @@
 
 
 
-  <form method="post" id="personForm" data-modeliai-url="{% url 'ajax_load_modeliai' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-  </form>
   
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-  <script>
-      $("#id_marke").change(function () {
-          const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
-          const markeId = $(this).val();  // get the selected country ID from the HTML input
-  
-          $.ajax({                       // initialize an AJAX request
-              url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
-              data: {
-                  'marke_id': markeId       // add the country id to the GET parameters
-              },
-              success: function (data) {   // `data` is the return of the `load_cities` view function
-                  $("#id_modelis").html(data);  // replace the contents of the city input with the data that came from the server
-                /*
-  
-                let html_data = '<option value="">---------</option>';
-                data.forEach(function (city) {
-                    html_data += `<option value="${city.id}">${city.name}</option>`
-                });
-                console.log(html_data);
-                $("#id_city").html(html_data);
-  
-                */
-              }
-            });
-    
-        });
-    </script>
-
-
-
 
 
   <br />
@@ -148,4 +141,3 @@
 
 </script>
 {% endblock content %}
-

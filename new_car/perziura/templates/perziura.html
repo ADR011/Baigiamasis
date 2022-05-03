@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h3>Rementų sąrašas</h3>
+<h3>Uzsakymu sąrašas</h3>
 
   <table class="table table-hover mt-5">
     <thead>
@@ -13,13 +13,18 @@
       </tr>
     </thead>
     <tbody>
-      {% for order in orders %}
+      {% for klientas in klientai %}
     <tr>
-        <td scope="row">{{order.vardas}}</td>
+        <td scope="row">{{klientas.klientas_vardas}}</td>
+        <td >{{klientas.klientas_pavarde}}</td>
+        <td>{{klientas.marke.first}}</td> 
+        <td>{{klientas.marke.first.modelis.first}}</td>
+        <td>{{klientas.marke.first.modelis.first.metai.first}}</td>
+        {% comment %} <td scope="row">{{order.vardas}}</td>
         <td >{{order.pavarde}}</td>
         <td>{{order.marke.first}}</td> 
         <td>{{order.marke.first.modelis.first}}</td>
-        <td>{{order.marke.first.modelis.first.metai.first}}</td>  
+        <td>{{order.marke.first.modelis.first.metai.first}}</td>   {% endcomment %}
     </tr>
     {% endfor %}
     </tbody>
