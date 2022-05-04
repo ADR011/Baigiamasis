@@ -1,3 +1,4 @@
+from tkinter import Pack
 from django.db import models
 
 # from tkinter import TRUE
@@ -66,10 +67,14 @@ class Modelis(models.Model):
 
 
 class Klientas(models.Model):
-    name = models.CharField(max_length=124)
+    Vardas = models.CharField(max_length=124)
+    Pavardė = models.CharField(max_length=124)
+    El_pastas = models.CharField(max_length=124)
+    Gimimo_metai = models.CharField(max_length=124)
     marke = models.ForeignKey(Marke, on_delete=models.SET_NULL, blank=True, null=True)
     modelis = models.ForeignKey(Modelis, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return f'{self.automobilio_pagaminimo_metai}' 
+
 

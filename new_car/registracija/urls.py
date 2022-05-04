@@ -19,5 +19,7 @@ from . import views
 
 urlpatterns = [
 
-    path('', views.registracija, name='registracija'),
+    
+    path('persons/add/', views.registracija, name='registracija'),
+    path('persons/add/', views.person_create_view, name='person_add'),
 ]
