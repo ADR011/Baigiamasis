@@ -3,7 +3,7 @@ from django.contrib import admin
 
 # from .models import City, Country, Person
 
-from .models import Modelis, Marke, Klientas
+from .models import Modelis, Marke, Klientas, Order, Metai
 
 
 
@@ -17,3 +17,5 @@ from .models import Modelis, Marke, Klientas
 admin.site.register(Modelis)
 admin.site.register(Marke)
 admin.site.register(Klientas)
+admin.site.register(Order)
+admin.site.register(Metai)

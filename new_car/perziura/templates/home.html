@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -9,7 +16,6 @@
 </head>
 <body>
 <h2>Registracija</h2>
-
 <form method="post" id="personForm" data-modeliai-url="{% url 'ajax_load_modeliai' %}">
     {% csrf_token %}
     {{ form.as_p }}
@@ -45,5 +51,3 @@
     });
 </script>
 
-</body>
-</html>
