@@ -1,53 +1,10 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-
-
-
-<form method="post" id="personForm" data-modeliai-url="{% url 'ajax_load_modeliai' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Submit">
-</form>
-
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script>
-    $("#id_marke").change(function () {
-        const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
-        const markeId = $(this).val();  // get the selected country ID from the HTML input
-
-        $.ajax({                       // initialize an AJAX request
-            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
-            data: {
-                'marke_id': markeId       // add the country id to the GET parameters
-            },
-            success: function (data) {   // `data` is the return of the `load_cities` view function
-                $("#id_modelis").html(data);  // replace the contents of the city input with the data that came from the server
-                /*
-
-                let html_data = '<option value="">---------</option>';
-                data.forEach(function (city) {
-                    html_data += `<option value="${city.id}">${city.name}</option>`
-                });
-                console.log(html_data);
-                $("#id_city").html(html_data);
-
-                */
-            }
-        });
-
-    });
-</script>
-
-
-
-
-
 
 <h3>Registracija</h3>
 <!--Register-->
-<form method='post'>
+<form method='post' id = 'personForm' data-modeliai-url="{% url 'ajax_load_modeliai' %}"> 
     {% csrf_token %}
   Vardas
   <input
@@ -78,20 +35,17 @@
     aria-describedby="Elektroninis paštas"
   />
   <br />
-  {% comment %} Automobilio markė
+   Automobilio markė
   <br />
-  <select name="marke" id='marke' placeholder="Pasirinkti markę..." onchange='pakeistiModelius()'/>
-  <br />
+  <select name="marke" id='marke' placeholder="Pasirinkti markę..." >
+    {% for marke in listas %}
+    <option>{{marke.marke}}</option>
+    {% endfor %}
+  </select> 
   <br />
   Automobilio modelis
   <select name="modelis"  id='modelis' placeholder="Pasirinkti modelį..">
-  </select> {% endcomment %}
-
-
-
-
-  
-
+  </select> 
 
   <br />
   Automobilio pagaminimo metai
@@ -109,35 +63,26 @@
   <br />
   <button type="submit" class="btn btn-primary">Registruotis</button>
 </form>
-<script>
-  const masinuListas = {% autoescape off %}{{ listas }}{% endautoescape %};
-  let selectMarke=document.getElementById('marke');
-  let selectModelis=document.getElementById('modelis');
-  
-  masinuListas.forEach(car=>{
-    let option = document.createElement("option");
-    option.value = car.marke;
-    console.log(option.value);
-    option.text = car.marke;
-    selectMarke.add(option);
-  });
-  const pakeistiModelius=()=>{
-    
-    console.log(selectMarke.value)
-    masinuListas.forEach(car=>{
-      if(car.marke==selectMarke.value){
-        car.modeliai.forEach(modelis=>{
-          let option1 = document.createElement("option");
-          option1.value = modelis.modelis;
-          console.log(option1.value);
-          option1.text = modelis.modelis;
-          selectModelis.add(option1);
-        });
-        
-      };
-      
-    });
-  };
 
+
+<script>
+    $("#marke").change(function () {
+      
+      const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
+    console.log(url);
+      const markeId = $(this).val();  // get the selected country ID from the HTML input
+      console.log(markeId);
+
+      $.post(url, {
+        'marke_id': markeId       // add the country id to the GET parameters
+      },)
+      .done(function( data ) {
+        $("#modelis").html(data);
+      });
+
+        
+
+    });
 </script>
+
 {% endblock content %}

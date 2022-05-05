@@ -2,12 +2,12 @@ from django import forms
 
 # from .models import Person, City
 
-from .models import Klientas, Modelis
+from .models import Order, Modelis
 
 
 class PersonCreationForm(forms.ModelForm):
     class Meta:
-        model = Klientas
+        model = Order
         fields = '__all__'
 
     def __init__(self, *args, **kwargs):

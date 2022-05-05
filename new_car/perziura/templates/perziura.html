@@ -15,8 +15,8 @@
     <tbody>
       {% for klientas in klientai %}
     <tr>
-        <td scope="row">{{klientas.klientas_vardas}}</td>
-        <td >{{klientas.klientas_pavarde}}</td>
+        <td scope="row">{{klientas.vardas}}</td>
+        <td >{{klientas.pavarde}}</td>
         <td>{{klientas.marke.first}}</td> 
         <td>{{klientas.marke.first.modelis.first}}</td>
         <td>{{klientas.marke.first.modelis.first.metai.first}}</td>
