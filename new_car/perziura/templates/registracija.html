@@ -4,7 +4,7 @@
 
 <h3>Registracija</h3>
 <!--Register-->
-<form method='post' id = 'personForm' data-modeliai-url="{% url 'ajax_load_modeliai' %}"> 
+<form method='post' id = 'personForm'> 
     {% csrf_token %}
   Vardas
   <input
@@ -49,17 +49,12 @@
 
   <br />
   Automobilio pagaminimo metai
-  <select name="metai"  id='metai' placeholder="Pasirinkti metus..">
+  <select name="metai"  id='metai' type="date" placeholder="Pasirinkti metus..">
   </select>
   <br />
   Automobilio spalva
-  <input
-    name="spalva"
-    type="text"
-    id="Spalva"
-    class="form-control"
-    aria-describedby="Automobilio pagaminimo metai"
-  />
+  <select name="spalva"  id='spalva' placeholder="Pasirinkti spalva..">
+  </select>
   <br />
   <button type="submit" class="btn btn-primary">Registruotis</button>
 </form>
@@ -68,20 +63,41 @@
 <script>
     $("#marke").change(function () {
       
-      const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
-    console.log(url);
-      const markeId = $(this).val();  // get the selected country ID from the HTML input
-      console.log(markeId);
+      const markeId = $(this).val();
 
-      $.post(url, {
+      $.post('/persons/ajax/load-modeliai/', {
         'marke_id': markeId       // add the country id to the GET parameters
       },)
       .done(function( data ) {
         $("#modelis").html(data);
       });
+    });
 
-        
 
+    $("#modelis").change(function () {
+      
+      const modelisId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.post('/persons/ajax/load-spalvos/', {
+        'modelis_id': modelisId       // add the country id to the GET parameters
+      },)
+      .done(function( data ) {
+        $("#spalva").html(data);
+      });
+    });
+    
+    
+    
+   $("#modelis").change(function () {
+      
+    const modelisId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.post('/persons/ajax/load-metais/', {
+        'modelis_id': modelisId      // add the country id to the GET parameters
+      },)
+      .done(function( data ) {
+        $("#metai").html(data);
+      });
     });
 </script>
 

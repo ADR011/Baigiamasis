@@ -27,7 +27,7 @@ class Marke(models.Model):
         verbose_name_plural = 'Markes'
 
     def __str__(self):
-        return self.marke  
+        return str(self.marke)  
 
 class Modelis(models.Model):
     modelis = models.CharField('automobilio modelis', max_length=20, null=True, blank=True, default='pass')
@@ -37,28 +37,30 @@ class Modelis(models.Model):
         verbose_name_plural = 'Modeliai'
 
     def __str__(self):
-        return self.modelis 
+        return str(self.modelis) 
 
 
 class Metai(models.Model): 
-    metai = models.DateField('automobilio pagaminimo metai', max_length=20, null=True, blank=True, default=datetime.date.today)
-    modeliai = models.ForeignKey(Modelis, on_delete=models.DO_NOTHING, null=True, related_name='metai')
+    metai = models.DateField('automobilio pagaminimo metai', max_length=20, null=True, blank=True, default=datetime.date(2022,3,1))
+    modeliai = models.ForeignKey(Modelis, on_delete=models.CASCADE, null=True, related_name='metai')
     class Meta:
         verbose_name = 'Metai'
-        verbose_name_plural = 'Metai'
+        verbose_name_plural = 'Metais'
 
     def __str__(self):
-        return self.metai
+        # return str(self.metai)
+        return '{}'.format(self.metai)
 
 class Spalva(models.Model): 
     spalva = models.CharField(max_length=124, blank=True, null=True)
-    modeliai = models.ForeignKey(Modelis, on_delete=models.DO_NOTHING, null=True, related_name='spalva')
+    modeliai = models.ForeignKey(Modelis, on_delete=models.CASCADE, null=True, related_name='spalva')
     class Meta:
         verbose_name = 'Spalva'
         verbose_name_plural = 'Spalva'
 
     def __str__(self):
-        return self.spalva
+        return str(self.spalva)
+
 
 
 ##############################################################################
