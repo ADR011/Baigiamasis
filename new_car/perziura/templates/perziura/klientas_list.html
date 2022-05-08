@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  
+<h3>Uzsakymu sąrašas</h3>
+
+<p>
+  <a href="{% url 'registracija' %}">Add person</a>
+</p>
+{% csrf_token %}
+
+<table border="1">
+  <thead>
+    <tr>
+      <th>Vardas</th>
+      <th>Pavarde</th>
+      <th>El. pastas</th>
+      <th>Marke</th>
+      <th>Modelis</th>
+      <th>Metai</th>
+      <th>Spalva</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    {% for klientas in klientai %}
+      <tr>
+        <td><a href="{% url 'redagavimas' klientas.pk %}">{{ klientas.klientas_vardas }}</a></td>
+        <td>{{ klientas.klientas_pavarde }}</td>
+        <td>{{ klientas.klientas_email }}</td>
+        <td>{{ klientas.marke }}</td>
+        <td>{{ klientas.modelis }}</td>
+        <td>{{ klientas.metai }}</td>
+        <td>{{ klientas.spalva }}</td>
+      </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">No person in the database. <a href="{% url 'registracija' %}">Add the first person</a>.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

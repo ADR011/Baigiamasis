@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Uzsakymu sąrašas</h3>
+
+  <table class="table table-hover mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Vardas</th>
+        <th scope="col">Pavardė</th>
+        <th scope="col">Markė</th> 
+        <th scope="col">Modelis</th>
+        <th scope="col">Metai</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for klientas in klientai %}
+    <tr>
+        <td scope="row">{{klientas.vardas}}</td>
+        <td >{{klientas.pavarde}}</td>
+        <td>{{klientas.marke.first}}</td> 
+        <td>{{klientas.marke.first.modelis.first}}</td>
+        <td>{{klientas.marke.first.modelis.first.metai.first}}</td>
+        {% comment %} <td scope="row">{{order.vardas}}</td>
+        <td >{{order.pavarde}}</td>
+        <td>{{order.marke.first}}</td> 
+        <td>{{order.marke.first.modelis.first}}</td>
+        <td>{{order.marke.first.modelis.first.metai.first}}</td>   {% endcomment %}
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endblock content %}

@@ -2,10 +2,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.pradinis, name='home'),
-    path('perziura/', views.perziura, name='perziura'),
-    path('registracija/', views.registracija, name='registracija'),
+    path('', views.pradinis, name='pradinis'),
+    path('perziura/', views.Perziura.as_view(), name='perziura'),
+    path('registracija/', views.Registracija.as_view(), name='registracija'),
     
+    path('<int:pk>/', views.Redagavimas.as_view(), name='redagavimas'),
 
 
     path('ajax/load-modeliai/', views.load_modeliai, name='ajax_load_modeliai'), # AJAX

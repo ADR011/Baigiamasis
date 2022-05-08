@@ -1,0 +1,136 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dependent Dropdown in Django</title>
+</head>
+
+<h2>Registracija</h2>
+  
+<form method='post' id = 'personForm' novalidate> 
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+    <input type="submit" value="Submit">
+    <a href="{% url 'pradinis' %}">Nevermind</a>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_marke").change(function () {
+    const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
+    const markeId = $(this).val();
+
+    $.post('/ajax/load-modeliai/', {
+      'marke_id': markeId       // add the country id to the GET parameters
+    },)
+    .done(function( data ) {
+      $("#id_modelis").html(data);
+    });
+  });
+
+
+  
+  
+  $("#id_modelis").change(function () {
+    
+    const modelisId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.post('/ajax/load-metais/', {
+        'modelis_id': modelisId      // add the country id to the GET parameters
+      },)
+      .done(function( data ) {
+        $("id_#metai").html(data);
+      });
+    });
+
+
+  $("#modelis").change(function () {
+    
+    const modelisId = $(this).val();  // get the selected country ID from the HTML input
+
+    $.post('/ajax/load-spalvos/', {
+      'modelis_id': modelisId       // add the country id to the GET parameters
+    },)
+    .done(function( data ) {
+      $("#id_spalva").html(data);
+    });
+  });
+  
+
+</script>
+
+</div>
+
+{% endblock %}
+
+
+
+
+
+{% comment %} 
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dependent Dropdown in Django</title>
+</head>
+
+<h2>Registracija</h2>
+  
+<form method="post" id="personForm" data-modeliai-url="{% url 'ajax_load_modeliai' %}">
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+    <input type="submit" value="Submit">
+    <a href="{% url 'pradinis' %}">Nevermind</a>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_marke").change(function () {
+      const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
+      const markeId = $(this).val();  // get the selected country ID from the HTML input
+
+        $.ajax({                       // initialize an AJAX request
+            url: url,                    // set the url of the request (= /persons/ajax/load-cities/ )
+            data: {
+                'marke_Id': markeId       // add the country id to the GET parameters
+            },
+            success: function (data) {   // `data` is the return of the `load_cities` view function
+                $("#id_modelis").html(data);  // replace the contents of the city input with the data that came from the server
+               
+            }
+        });
+
+    });
+</script>
+</div>
+
+{% endblock %}
+
+ {% endcomment %}
+
+
+
+
+
+
+
