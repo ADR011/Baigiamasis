@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PersonForm
-from .models import Klientas, Marke, Modelis
+# from .models import Klientas, Marke, Modelis
 # , Metai, Spalva
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
@@ -18,7 +18,7 @@ from django.urls import reverse_lazy
 #     return render(request, 'perziura.html', context=context)
 
 def pradinis(request):
-    return render(request, 'pradinis.html')
+    return render(request, 'perziura/pradinis.html')
 
 # def registracija(request):
 #     if request.method=='POST':
@@ -94,33 +94,36 @@ class Redagavimas(UpdateView):
 def load_modeliai(request):
     marke_id = request.POST.get('marke_id')
     # print('marke_id', marke_id)
-    # modeliai = Modelis.objects.filter(marke__marke__contains = marke_id)
+    # modeliai = Modelis.objects.filter(marke__marke__contains = marke_id).all()
     modeliai = Modelis.objects.filter(marke_id=marke_id).all()
-    print('modelis', modeliai)
-    return render(request, 'options_modelis.html', {'modeliai': modeliai})
+    print('modeliai', modeliai)
+    return render(request, 'perziura/options_modelis.html', {'modeliai': modeliai})
 #  def load_modeliai(request):
 #     marke_id = request.POST.get('marke_id')
 #     modeliai = Modelis.objects.filter(marke__marke__contains = marke_id)
 #     return render(request, 'options_modelis.html', {'modeliai': modeliai})
 
 
+
+
 @csrf_exempt
 def load_metais(request):
     modelis_id = request.POST.get('modelis_id')
-    metais = Modelis.objects.filter(modelis_id=modelis_id).all()
-    print('metai', metais)
-    return render(request, 'options_metai.html', {'metais': metais})
+    # metais = Metai.objects.filter(modelis__modelis__contains = modelis_id)
+    metais = Metai.objects.filter(modelis_id=modelis_id).all()
+    print('metais', metais)
+    return render(request, 'perziura/options_metai.html', {'metais': metais})
+
 
 
 @csrf_exempt
 def load_spalvos(request):
     modelis_id = request.POST.get('modelis_id')
-    spalvos = Modelis.objects.filter(modelis_id=modelis_id).all()
+    # spalvos = Spalva.objects.filter(modelis__modelis__contains = modelis_id)
+    spalvos = Spalva.objects.filter(modelis_id=modelis_id).all()
     print('spalvos', spalvos)
-    return render(request, 'options_spalvos.html', {'spalvos': spalvos})
+    return render(request, 'perziura/options_spalvos.html', {'spalvos': spalvos})
     #return JsonResponse(list(modeliai.values('id', 'name')), safe=False)
-
-
     
 
 

@@ -1,0 +1,72 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+  <div class="container">
+
+
+
+
+
+<h2>Registracija</h2>
+  
+<form method='post' id = 'personForm' > 
+  {% csrf_token %}
+  <table>
+    {{ form.as_table }}
+  </table>
+    <input type="submit" value="Submit">
+    <a href="{% url 'pradinis' %}">Nevermind</a>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+  $("#id_marke").change(function () {
+    const url = $("#personForm").attr("data-modeliai-url");  // get the url of the `load_cities` view
+    const markeId = $(this).val();
+
+    $.post('/ajax/load-modeliai/', {
+      'marke_id': markeId       // add the country id to the GET parameters
+    },)
+    .done(function( data ) {
+      $("#id_modelis").html(data);
+    });
+  });
+
+
+  
+  
+  $("#id_modelis").change(function () {
+    var url = $("#personForm").attr("data-metais-url");
+    var modelisId = $(this).val();  // get the selected country ID from the HTML input
+
+      $.post('/ajax/load-metais/', {
+        'modelis_id': modelisId      // add the country id to the GET parameters
+      },)
+      .done(function( data ) {
+        $("id_#metai").html(data);
+      });
+    });
+
+
+  $("#id_modelis").change(function () {
+    var url = $("#personForm").attr("data-spalvos-url");
+    var modelisId = $(this).val();  // get the selected country ID from the HTML input
+
+    $.post('/ajax/load-spalvos/', {
+      'modelis_id': modelisId       // add the country id to the GET parameters
+    },)
+    .done(function( data ) {
+      $("#id_spalva").html(data);
+    });
+  });
+  
+
+</script>
+
+</div>
+</body>
+{% endblock %}
+
+

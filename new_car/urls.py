@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('perziura.urls')),
     path('perziura/', include('perziura.urls')),
-    path('registracija/', include('registracija.urls')),
+    # path('registracija/', include('registracija.urls')),
 
     # path('persons/', include('perziura.urls'))
 ]

@@ -70,43 +70,34 @@ import datetime
 
 
 class Marke(models.Model):
-    marke = models.CharField(max_length=20, null=True, blank=True, default='mark')
-    # orders = models.ManyToManyField(Order, null=True, related_name='marke', blank=True)
-    # class Meta:
-    #     verbose_name = 'Marke'
-    #     verbose_name_plural = 'Markes'
-
+    marke = models.CharField(max_length=20, null=True, blank=True, default='marke')
     def __str__(self):
         return self.marke  
 
 class Modelis(models.Model):
-    modelis = models.CharField('automobilio modelis', max_length=20, null=True, blank=True, default='pass')
+    modelis = models.CharField(max_length=20, null=True, blank=True, default='modelis')
     marke = models.ForeignKey(Marke, on_delete=models.CASCADE, null=True)
-    # class Meta:
-    #     verbose_name = 'Modelis'
-    #     verbose_name_plural = 'Modeliai'
-
     def __str__(self):
         return self.modelis 
 
 
 class Metai(models.Model):
-    metai = models.CharField('metai', max_length=20, null=True, blank=True, default='None')
-    modelis = models.ForeignKey(Modelis, on_delete=models.DO_NOTHING, null=True)
+    metai = models.CharField(max_length=20, null=True, blank=True, default='metai')
+    modelis = models.ForeignKey(Modelis, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.metai 
 
 
 class Spalva(models.Model):
-    spalva = models.CharField('spalva', max_length=20, null=True, blank=True, default='None')
-    modelis = models.ForeignKey(Modelis, on_delete=models.DO_NOTHING, null=True)
+    spalva = models.CharField(max_length=20, null=True, blank=True, default='spalva')
+    modelis = models.ForeignKey(Modelis, on_delete=models.CASCADE, null=True)
     def __str__(self):
         return self.spalva 
 
 
 class Klientas(models.Model):
-    klientas_vardas = models.CharField(max_length=124, blank=False, null=True)
-    klientas_pavarde = models.CharField(max_length=124, blank=False, null=True)
+    klientas_vardas = models.CharField(max_length=124, blank=True, null=True)
+    klientas_pavarde = models.CharField(max_length=124, blank=True, null=True)
     klientas_email = models.CharField(max_length=30, blank=True, null=True)
     marke = models.ForeignKey(Marke, on_delete=models.SET_NULL, null=True)
     modelis = models.ForeignKey(Modelis, on_delete=models.SET_NULL, null=True)
