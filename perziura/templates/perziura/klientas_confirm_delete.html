@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+  <div class="container">
+
+<form action="" method="post">{% csrf_token %}
+    <p>Ar tikrai norite istrinti "{{ klientas.klientas_vardas }} {{klientas.klientas_pavarde }}" uzsakyma?</p>
+    <input type="submit" value="Confirm" />
+</form>
+
+</div>
+</body>
+{% endblock %}

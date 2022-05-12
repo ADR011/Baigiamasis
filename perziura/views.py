@@ -4,7 +4,7 @@ from .forms import PersonForm
 # , Metai, Spalva
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from multiprocessing import context
 from .models import Klientas, Marke, Modelis, Metai, Spalva
 from django.urls import reverse_lazy
@@ -86,6 +86,18 @@ class Redagavimas(UpdateView):
     # fields = ('klientas_vardas', 'klientas_pavarde', 'klientas_email', 'klientas_spalva')
     success_url = reverse_lazy('perziura')
 
+class Pasalinimas(DeleteView):
+    model = Klientas
+    # form_class = PersonForm
+    # fields = ('klientas_vardas', 'klientas_pavarde', 'klientas_email', 'klientas_spalva')
+    success_url = reverse_lazy('perziura')
+
+
+
+# # def Pasalinimas(self, request, klientas_id):
+#     klientas = Klientas.objects.get(pk=klientas_id)
+#     klientas.delete()
+#     return redirect('klientas_list')
 
 
 

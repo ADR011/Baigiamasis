@@ -7,6 +7,7 @@ urlpatterns = [
     path('registracija/', views.Registracija.as_view(), name='registracija'),
     
     path('<int:pk>/', views.Redagavimas.as_view(), name='redagavimas'),
+    path('pasalinimas/<int:pk>/', views.Pasalinimas.as_view(), name='pasalinimas'),
 
 
     path('ajax/load-modeliai/', views.load_modeliai, name='ajax_load_modeliai'), # AJAX

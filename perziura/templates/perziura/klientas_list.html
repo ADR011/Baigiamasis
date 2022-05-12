@@ -20,6 +20,7 @@
       <th>Modelis</th>
       <th>Metai</th>
       <th>Spalva</th>
+      <th>Pašalinti</th>
 
     </tr>
   </thead>
@@ -33,6 +34,10 @@
         <td>{{ klientas.modelis }}</td>
         <td>{{ klientas.metai }}</td>
         <td>{{ klientas.spalva }}</td>
+        <td>
+           <a href="{% url 'pasalinimas' klientas.pk %}" class="btn btn-outline-danger btn-sm"> Pasalinti</a>
+
+     
       </tr>
       {% empty %}
         <tr>
