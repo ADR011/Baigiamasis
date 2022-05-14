@@ -3,8 +3,13 @@
 {% block content %}
 
   
-<h3>Uzsakymu sąrašas</h3>
-
+<h2>Uzsakymu sąrašas</h2>
+<h3>
+  <style>
+    h3 {
+      text-shadow: 0px 0px 5px white;
+    }
+    </style>
 {% csrf_token %}
 
 <table class = "table">
@@ -37,7 +42,7 @@
             <td>{{ klientas.spalva }}</td>
             <td>
       
-           <a href="{% url 'pasalinimas' klientas.pk %}" class="btn btn-outline-danger btn-sm"> Pasalinti</a>
+           <a href="{% url 'pasalinimas' klientas.pk %}" class="btn btn-danger btn-lg "> Pašalinti</a>
             </td>
 
    
@@ -51,5 +56,5 @@
       {% endfor %}
     </tbody>
   </table>
-
+</h3>
 {% endblock %}

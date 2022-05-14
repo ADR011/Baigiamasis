@@ -3,17 +3,33 @@
 <html>
 
 <head>
+  <style>
+  body {
+    background: url('https://doy2mn9upadnk.cloudfront.net/uploads/default/original/4X/b/e/3/be3f4b64ed922668370dc5b7304acf0366495722.jpeg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
+</style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 <body>
-  <div class="container">
-    
 
-<nav class="navbar navbar-expand-lg bg-light">
+ 
+
   <div class="container-fluid">
+    <div class="opacity-25"></div>
+    <h4> <nav class="navbar navbar-expand-sm bg-info text-black">
+    <style>  .navbar-nav > li{
+        padding-left:20px;
+        padding-right:20px;
+      }
+    </style>
+      <div class="mx-auto d-sm-flex d-block ">
     <a class="navbar-brand" href="/">
       <img src="http://127.0.0.1:8000/media/car.png" width="200px"/>
     </a>
@@ -23,10 +39,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link" href="/registracija">Registracija</a>
+          <a class="nav-link" href="/registracija">Registracija</a><br>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/perziura">Užregistruoti naujų automobilių pirkėjai</a>
+         <br> <a class="nav-link" href="/perziura">Užregistruoti naujų automobilių pirkėjai</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/ivykdyti">Ivykdyti uzsakymai</a>
@@ -34,11 +50,25 @@
       </ul>
     </div>
   </div>
-</nav>
+  
+</nav></h4>
     <!-- Content here -->
+    <h4>
+      <style>
+        h4 {
+          text-shadow: 1px 1px 2px black, 0 0 5px blue, 0 0 0.2em white;
+          color: white;
+          font-size: 30px;
+      }
+        </style>
+
+
 {% block content %}{% endblock content %}
-</div>
+   
 
 <!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script></body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+</script>
+</div></div> </h4>
+</body>
 </html>
