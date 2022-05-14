@@ -3,11 +3,9 @@
 {% block content %}
 
   
-<h3>Uzsakymu sąrašas</h3>
+<h3>Ivykdyti uzsakymai</h3>
 
-<p>
-  <a href="{% url 'registracija' %}">Add person</a>
-</p>
+
 {% csrf_token %}
 
 <table border="1">
@@ -26,7 +24,7 @@
   </thead>
   <tbody>
     {% for klientas in klientai %}
-    {% if klientas.ivykdytas == False %}
+    {% if klientas.ivykdytas == True %}
       <tr>
 
      

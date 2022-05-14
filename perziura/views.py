@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import PersonForm
-# from .models import Klientas, Marke, Modelis
-# , Metai, Spalva
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
@@ -11,73 +9,47 @@ from django.urls import reverse_lazy
 
 
 
-
-# def perziura(request):
-#     klientai = Order.objects.all()
-#     context={'klientai': klientai}
-#     return render(request, 'perziura.html', context=context)
-
 def pradinis(request):
     return render(request, 'perziura/pradinis.html')
 
-# def registracija(request):
-#     if request.method=='POST':
-#         user_name = request.POST.get('user_name')
-#         user_last_name = request.POST.get('last_name')
-#         user_email = request.POST.get('email')
-#         marke = request.POST.get('marke')
-#         modelis = request.POST.get('modelis')
-#         metai = request.POST.get('metai')
-#         spalva = request.POST.get('spalva')
-#         new = Order(vardas = user_name, pavarde = user_last_name, email = user_email)
-#         new.save()
-#         marke = Marke(marke = marke)
-#         modelis = Modelis(modelis = modelis)
-#         metai = Metai(metai = metai)
-#         spalva = Spalva(spalva = spalva)
-#         marke.save()
-#         modelis.save()
-#         metai.save()
-#         spalva.save()
-#         modelis.metai.add(metai)
-#         marke.modelis.add(modelis)
-#         modelis.spalva.add(spalva)
-#         # new.marke.add(marke)
-#         # new.save() 
-#     listas = []
-#     modeliai = Modelis.objects.all()
-#     markes = Marke.objects.all()
-#     metai = Metai.objects.all()
-
-#     spalvos = Spalva.objects.all()
-#     for marke in markes:
-#         data = {}
-#         data['marke']=marke.marke
-#         data['modeliai'] = []
-
-#         for modelis in marke.modelis.all():
-#             naujas_modelis = {}
-#             naujas_modelis['modelis'] = modelis.modelis
-#             naujas_modelis['metai'] = []
-#             for m in modelis.metai.all():
-#                 naujas_modelis['metai'].append(str(m.metai))
-#             data['modeliai'].append(naujas_modelis)
-#         listas.append(data)
-#     # print(metai)
-#     return render(request, 'registracija.html',context = {'listas':listas})
+# ################################################################
+# class Ivykdyti(ListView):
+#     model = Klientas
+#     context_object_name = 'klientai'
 
 
-################################################################
+
+
+# def ivykdyti(request):
+#    listas = Klientas.objects.all()
+#    return render(request, 'perziura/klientas_list_done.html', {'listas' : listas})
+
+  
+def klientas_list_done(request):
+    klientai = Klientas.objects.all()
+    context={'klientai': klientai}
+    return render(request, 'perziura/klientas_list_done.html', context=context)
+
+
 
 class Perziura(ListView):
     model = Klientas
     context_object_name = 'klientai'
 
+
+# class Ivykdyti(ListView):
+#     model = Klientas
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         context_object_name = 'klientai'
+#         return context
+  
+
 class Registracija(CreateView):
     model = Klientas
     form_class = PersonForm
     # fields = ('klientas_vardas', 'klientas_pavarde', 'klientas_email', 'klientas_spalva')
-    success_url = reverse_lazy('pradinis')
+    success_url = reverse_lazy('perziura')
 
 
 class Redagavimas(UpdateView):
@@ -94,14 +66,6 @@ class Pasalinimas(DeleteView):
 
 
 
-# # def Pasalinimas(self, request, klientas_id):
-#     klientas = Klientas.objects.get(pk=klientas_id)
-#     klientas.delete()
-#     return redirect('klientas_list')
-
-
-
-
 @csrf_exempt
 def load_modeliai(request):
     marke_id = request.POST.get('marke_id')
@@ -110,7 +74,7 @@ def load_modeliai(request):
     modeliai = Modelis.objects.filter(marke_id=marke_id).all()
     print('modeliai', modeliai)
     return render(request, 'perziura/options_modelis.html', {'modeliai': modeliai})
-#  def load_modeliai(request):
+    #  def load_modeliai(request):
 #     marke_id = request.POST.get('marke_id')
 #     modeliai = Modelis.objects.filter(marke__marke__contains = marke_id)
 #     return render(request, 'options_modelis.html', {'modeliai': modeliai})
@@ -122,6 +86,7 @@ def load_modeliai(request):
 def load_metais(request):
     modelis_id = request.POST.get('modelis_id')
     # metais = Metai.objects.filter(modelis__modelis__contains = modelis_id)
+    # modeliai = Modelis.objects.filter(ivykdytas=False).all()
     metais = Metai.objects.filter(modelis_id=modelis_id).all()
     print('metais', metais)
     return render(request, 'perziura/options_metai.html', {'metais': metais})
@@ -131,11 +96,11 @@ def load_metais(request):
 @csrf_exempt
 def load_spalvos(request):
     modelis_id = request.POST.get('modelis_id')
+    # modeliai = Modelis.objects.filter(ivykdytas=False).all()
     # spalvos = Spalva.objects.filter(modelis__modelis__contains = modelis_id)
     spalvos = Spalva.objects.filter(modelis_id=modelis_id).all()
     print('spalvos', spalvos)
     return render(request, 'perziura/options_spalvos.html', {'spalvos': spalvos})
     #return JsonResponse(list(modeliai.values('id', 'name')), safe=False)
     
-
 
