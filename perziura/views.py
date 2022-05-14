@@ -55,8 +55,7 @@ class Registracija(CreateView):
 class Redagavimas(UpdateView):
     model = Klientas
     form_class = PersonForm
-    # fields = ('klientas_vardas', 'klientas_pavarde', 'klientas_email', 'klientas_spalva')
-    success_url = reverse_lazy('perziura')
+    success_url = reverse_lazy('ivykdyti')
 
 class Pasalinimas(DeleteView):
     model = Klientas
