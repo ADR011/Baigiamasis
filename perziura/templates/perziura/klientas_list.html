@@ -5,12 +5,9 @@
   
 <h3>Uzsakymu sąrašas</h3>
 
-<p>
-  <a href="{% url 'registracija' %}">Add person</a>
-</p>
 {% csrf_token %}
 
-<table border="1">
+<table class = "table">
   <thead>
     <tr>
       <th>Vardas</th>
@@ -24,7 +21,7 @@
 
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-group-divider">
     {% for klientas in klientai %}
     {% if klientas.ivykdytas == False %}
       <tr>

@@ -3,12 +3,11 @@
 {% block content %}
 
   
-<h3>Ivykdyti uzsakymai</h3>
-
+<h3>Uzsakymu sąrašas</h3>
 
 {% csrf_token %}
 
-<table border="1">
+<table class = "table">
   <thead>
     <tr>
       <th>Vardas</th>
@@ -22,7 +21,7 @@
 
     </tr>
   </thead>
-  <tbody>
+  <tbody class="table-group-divider">
     {% for klientas in klientai %}
     {% if klientas.ivykdytas == True %}
       <tr>

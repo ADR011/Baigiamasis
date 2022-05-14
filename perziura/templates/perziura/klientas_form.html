@@ -12,8 +12,7 @@
   <table>
     {{ form.as_table }}
   </table>
-    <input type="submit" value="Registruoti">
-    <a href="{% url 'pradinis' %}">Užregistruoti naujų automobilių pirkėjai</a>
+    <button type="submit" class = 'btn btn-primary'>Registruoti</button>
 </form>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -39,22 +38,18 @@
         'modelis_id': modelisId      // add the country id to the GET parameters
       },)
       .done(function( data ) {
-        $("id_#metai").html(data);
+        $("#id_metai").html(data);
+      });
+      $.post('/ajax/load-spalvos/', {
+        'modelis_id': modelisId       // add the country id to the GET parameters
+      },)
+      .done(function( data ) {
+        $("#id_spalva").html(data);
       });
     });
 
 
-  $("#id_modelis").change(function () {
-    var url = $("#personForm").attr("data-spalvos-url");
-    var modelisId = $(this).val();  // get the selected country ID from the HTML input
 
-    $.post('/ajax/load-spalvos/', {
-      'modelis_id': modelisId       // add the country id to the GET parameters
-    },)
-    .done(function( data ) {
-      $("#id_spalva").html(data);
-    });
-  });
   
 
 </script>
